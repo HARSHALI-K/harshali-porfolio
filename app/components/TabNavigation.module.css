@@ -1,0 +1,118 @@
+.tabNavigation {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 0.5rem 0;
+  background: rgba(0, 0, 0, 0.3);
+  pointer-events: none; /* Allow clicks to pass through the navigation container */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.tabContainer {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  position: relative;
+  z-index: 2;
+  pointer-events: auto; /* Re-enable pointer events for the actual buttons */
+}
+
+.tabButton {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.75rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-width: 60px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  will-change: transform;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.tabButton:hover {
+  color: rgba(255, 255, 255, 1);
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.tabButton.active {
+  color: white;
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.tabButton.active .tabIcon {
+  transform: scale(1.1);
+}
+
+.tabIcon {
+  font-size: 1.25rem;
+  margin-bottom: 0.25rem;
+  transition: transform 0.3s ease;
+}
+
+.tabLabel {
+  font-size: 0.65rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  opacity: 0.9;
+}
+
+/* Add padding to the bottom of the content to account for fixed navigation */
+:global(.content-section) {
+  padding-bottom: 5rem;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Add a subtle gradient overlay at the bottom */
+.tabNavigation::before {
+  content: '';
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 180px;
+  background: linear-gradient(to top, 
+    rgba(0, 0, 0, 0.4) 0%,
+    rgba(0, 0, 0, 0.2) 50%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Add safe area padding for mobile devices */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .tabNavigation {
+    padding-bottom: calc(0.5rem + env(safe-area-inset-bottom));
+  }
+}
+
+/* Force hardware acceleration */
+.tabNavigation {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  perspective: 1000;
+  transform-style: preserve-3d;
+} 
