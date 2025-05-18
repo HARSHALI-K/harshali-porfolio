@@ -79,11 +79,11 @@
 }
 
 /* Add padding to the bottom of the content to account for fixed navigation */
-:global(.content-section) {
+/* :global(.content-section) {
   padding-bottom: 5rem;
   min-height: 100vh;
   position: relative;
-}
+} */
 
 /* Add a subtle gradient overlay at the bottom */
 .tabNavigation::before {
